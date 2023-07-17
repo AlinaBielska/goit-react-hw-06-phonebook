@@ -1,30 +1,27 @@
-import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
+import { setFilterValue } from '../../redux/filterSlice';
 import css from './Filter.module.css';
 
-const Filter = ({ filter, onInputChangeFilter }) => {
-    
-    let idFilter = nanoid();
+const Filter = () => {
+    const dispatch = useDispatch();
+
+    const filterContacts = e => {
+        const { value } = e.target;
+        dispatch(setFilterValue(value));
+    };
     
     return (
         <div className={css.filter}>
-            <label className={css.filterLabel} htmlFor={idFilter}>Find contacts by name</label>
+            <label className={css.filterLabel}>Find contacts by name</label>
             <input
                 className={css.filterInput}
-                id={idFilter}
                 type="text"
                 name="find"
-                value={filter}
-                onChange={onInputChangeFilter}
+                onChange={filterContacts}
                 title="Find contacts by name"
             />
         </div>
     );
-};
-
-Filter.propTypes = {
-    filter: PropTypes.string.isRequired,
-    onInputChangeFilter: PropTypes.func.isRequired,
 };
 
 export default Filter;

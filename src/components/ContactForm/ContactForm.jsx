@@ -1,57 +1,43 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
-const ContactForm = ({ contacts, onSubmitContact }) => {
-    const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
+const ContactForm = () => {
 
-    const onInputChangeName = evt => {
-        setName(evt.target.value);
+    const contacts = useSelector(getContacts);
+    const dispatch = useDispatch();
+
+    const onSubmitCheckAndAdd = e => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const formName = form.elements.name.value;
+        const formNumber = form.elements.number.value;
+
+        contacts.find(contact => contact.name.toLowerCase() === formName.toLowerCase())
+            ? window.alert(`${formName} is already in contacts`)
+            : dispatch(addContact(formName, formNumber));
+        
+        form.reset();
     };
-
-    const onInputChangeNumber = evt => {
-        setNumber(evt.target.value);
-    };
-
-    const onSubmitCheckAndAdd = evt => {
-        evt.preventDefault();
-        const contact = { name, number }
-        if (contacts.find((e) => e.name === contact.name)) {
-            alert(`${name} is already in contact!`);
-        } else {
-            onSubmitContact(contact);
-            setName("");
-            setNumber("");
-        }
-    };
-
-    let idName = nanoid();
-    let idNumber = nanoid();
     
     return (
         <form className={css.form} onSubmit={onSubmitCheckAndAdd}>
-            <label className={css.formLabel} htmlFor={idName}>Name</label>
+            <label className={css.formLabel}>Name</label>
             <input
                 className={css.formInput}
-                id={idName}
                 type="text"
                 name="name"
-                value={name}
-                onChange={onInputChangeName}
                 pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
             />
-            <label className={css.formLabel} htmlFor={idNumber}>Number</label>
+            <label className={css.formLabel}>Number</label>
             <input
                 className={css.formInput}
-                id={idNumber}
                 type="tel"
                 name="number"
-                value={number}
-                onChange={onInputChangeNumber}
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                 required
@@ -63,11 +49,10 @@ const ContactForm = ({ contacts, onSubmitContact }) => {
 
 ContactForm.propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         number: PropTypes.string.isRequired,
-    })),
-    onSubmitContact: PropTypes.func.isRequired,
-    
+    }))
 };
 
 export default ContactForm;

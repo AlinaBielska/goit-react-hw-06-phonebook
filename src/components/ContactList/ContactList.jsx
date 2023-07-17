@@ -1,24 +1,36 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
+import { getContacts, getFilter } from '../../redux/selectors';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 import css from './ContactList.module.css';
-import ContactListItem from "components/ContactListItem/ContactListItem";
 
-const ContactList = ({ contacts, filter, deleteContact }) => {
+const ContactList = () => {
+    const dispatch = useDispatch();
+    const contacts = useSelector(getContacts);
+    const filter = useSelector(getFilter);
+
+    const deleteContactFromLS = e => {
+        e.preventDefault();
+        const { id } = e.target;
+        dispatch(deleteContact(id));
+    };
+
     return (
         <ul className={css.contactList} >
             {contacts
                 .filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
-                .map(contact => {
-                    const key = nanoid();
+                .map(({id, name, number}) => {
                     return (
-                        <ContactListItem
-                            key={key}
-                            id={contact.id}
-                            name={contact.name}
-                            number={contact.number}
-                            deleteContact={deleteContact}
-                        />
-                    )
+                        <li className={css.contactItem} key={id}>
+                            <span>{name}: {number}</span>
+                            <button
+                                className={css.contactButton}
+                                type="button"
+                                onClick={deleteContactFromLS}>
+                                X
+                            </button>
+                        </li>
+                    );
                 })}
         </ul>
     );
@@ -29,9 +41,7 @@ ContactList.propTypes = {
         name: PropTypes.string.isRequired,
         number: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
-    })),
-    filter: PropTypes.string.isRequired,
-    deleteContact: PropTypes.func.isRequired,
+    }))
 };
 
 export default ContactList;
