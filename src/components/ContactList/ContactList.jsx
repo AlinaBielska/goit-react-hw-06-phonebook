@@ -26,6 +26,7 @@ const ContactList = () => {
                             <button
                                 className={css.contactButton}
                                 type="button"
+                                id={id}
                                 onClick={deleteContactFromLS}>
                                 X
                             </button>
