@@ -1,0 +1,22 @@
+.contactItem {
+    color: white;
+    font-size: 25px;
+    color: #c6c23f;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+}
+.contactButton {
+    margin-left: 10px;
+    height: 25px;
+    width: 25px;
+    font-weight: bold;
+    background-color: black;
+    color: #121212;
+    letter-spacing: 5px;
+    text-shadow: -1px 1px 0 #c63d2b,
+        1px 1px 0 #c63d2b,
+        1px -1px 0 #c63d2b,
+        -1px -1px 0 #c63d2b;
+    border-color: #c63d2b;
+}

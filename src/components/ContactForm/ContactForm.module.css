@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+.form {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 380px;
+    height: 430px;
+}
+.formLabel {
+        font-size: 50px;
+        font-weight: bold;
+        color: #121212;
+        text-align: center;
+        letter-spacing: 5px;
+        text-shadow: -1px 1px 0 #41ba45,
+            1px 1px 0 #41ba45,
+            1px -1px 0 #41ba45,
+            -1px -1px 0 #41ba45;
+}
+.formInput {
+    background-color: #bcf0bd;
+    height: 30px;
+    width: 300px;
+    margin-inline: auto;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    outline-color: #41ba45;
+    padding-left: 20px;
+    font-family: inherit;
+    font-size: 25px;
+}
+.formButton {
+    width: 250px;
+    height: 60px;
+    border-radius: 6px;
+    margin-inline: auto;
+    font-size: 28px;
+    background-color: black;
+    /* background: linear-gradient(-45deg, #ffb8ca, #c2e297) 0 0/400% 400%;
+        animation: 3s infinite colors; */
+    font-family: inherit;
+    font-weight: bold;
+    color: #121212;
+    letter-spacing: 5px;
+    text-shadow: -1px 1px 0 #42afac,
+            1px 1px 0 #42afac,
+            1px -1px 0 #42afac,
+            -1px -1px 0 #42afac;
+    border-color: #42afac;
+}
+
+/* @keyframes colors {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+} */

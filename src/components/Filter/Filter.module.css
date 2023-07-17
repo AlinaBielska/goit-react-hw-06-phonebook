@@ -1,0 +1,29 @@
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.filterLabel {
+        font-size: 25px;
+        font-weight: bold;
+        color: #121212;
+        /* text-align: center; */
+        letter-spacing: 5px;
+        text-shadow: -1px 1px 0 #c6c23f,
+            1px 1px 0 #c6c23f,
+            1px -1px 0 #c6c23f,
+            -1px -1px 0 #c6c23f;
+}
+.filterInput {
+    background-color: #fcfab4;
+    height: 30px;
+    width: 300px;
+    margin-inline: auto;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    outline-color: #c6c23f;
+    padding-left: 20px;
+    font-family: inherit;
+    font-size: 25px;
+    margin-top: 15px;
+}
